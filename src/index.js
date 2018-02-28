@@ -158,14 +158,14 @@ class Root extends Component {
     <StyledWrapper>
       <StyledColumn center={!this.state.input.length}>
         <StyledHeaderWrapper>
-          <StyledHeader>
-            <StyledLogo>
-              <a href="https://balance.io" target="_blank" rel="noopener noreferrer">
+          <a href="https://balance.io" target="_blank" rel="noopener noreferrer">
+            <StyledHeader>
+              <StyledLogo>
                 <img src={logo} alt="Balance" />
-              </a>
-            </StyledLogo>
-            <StyledBranding>Balance</StyledBranding>
-          </StyledHeader>
+              </StyledLogo>
+              <StyledBranding>Balance</StyledBranding>
+            </StyledHeader>
+          </a>
         </StyledHeaderWrapper>
         <Form onSubmit={this.updateList}>
           <Input placeholder="Search a token" onChange={this.onInputChange} />
