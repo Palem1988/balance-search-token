@@ -160,7 +160,9 @@ class Root extends Component {
         <StyledHeaderWrapper>
           <StyledHeader>
             <StyledLogo>
-              <img src={logo} alt="Balance" />
+              <a href="https://balance.io" target="_blank" rel="noopener noreferrer">
+                <img src={logo} alt="Balance" />
+              </a>
             </StyledLogo>
             <StyledBranding>Balance</StyledBranding>
           </StyledHeader>
