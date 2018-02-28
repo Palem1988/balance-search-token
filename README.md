@@ -2,7 +2,7 @@
 
 #### Search Cryptocurrency and check if it's a Token or a Coin
 
-[Cryptocurrency Icons](https://github.com/cjdowner/cryptocurrency-icons) by [Christopher Downer](https://github.com/cjdowner/cryptocurrency-icons)
+[Cryptocurrency Icons](https://github.com/cjdowner/cryptocurrency-icons) by [Christopher Downer](https://github.com/cjdowner)
 
 For development
 
