@@ -37,7 +37,7 @@ const StyledWrapper = styled(Wrapper)`
 
 const StyledHeaderWrapper = styled.div`
   width: 100%;
-  margin: 30px 0 15px;
+  margin: ${({ center }) => (center ? '15px 0' : '30px 0 15px')};
   display: block;
 `;
 
@@ -162,7 +162,6 @@ class Root extends Component {
         const sortedStartsWithKeys = Object.keys(startsWithMatch).sort(
           (a, b) => startsWithMatch[a].name.length - startsWithMatch[b].name.length
         );
-        console.log(startsWithMatch);
         const sortedStartsWithMatch = sortedStartsWithKeys.map(key => startsWithMatch[key]);
         const anyMatch = cryptoData.filter(
           crypto =>
@@ -195,7 +194,7 @@ class Root extends Component {
     <StyledWrapper>
       <IconPreload />
       <StyledColumn center={!this.state.input.length}>
-        <StyledHeaderWrapper>
+        <StyledHeaderWrapper center={!this.state.input.length}>
           <a href="https://balance.io" target="_blank" rel="noopener noreferrer">
             <StyledHeader>
               <StyledLogo>
