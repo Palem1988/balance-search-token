@@ -3,6 +3,10 @@
   "description": "Balance - Search Token",
   "version": "1.0.0",
   "author": "Pedro Gomes <pedro@balance.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/balance-io/balance-search-token/issues"
+  },
   "dependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
