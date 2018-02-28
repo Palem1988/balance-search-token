@@ -5,14 +5,26 @@ import registerServiceWorker from './registerServiceWorker';
 import logo from './logo.svg';
 import Form from './components/Form';
 import Wrapper from './components/Wrapper';
-import Column from './components/Column';
 import Input from './components/Input';
 import cryptoData from './crypto.json';
 import cryptoIcons from './cryptocurrency-icons';
-import { colors, fonts, responsive, globalStyles } from './styles';
+import { colors, fonts, transitions, responsive, globalStyles } from './styles';
 
 // eslint-disable-next-line
 injectGlobal`${globalStyles}`;
+
+const StyledColumn = styled.div`
+  transition: ${transitions.long};
+  width: 100%;
+  height: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-grow: 1;
+  justify-content: ${({ center }) => (center ? 'center' : 'flex-start')};
+  align-items: center;
+  flex-direction: column;
+`;
 
 const StyledWrapper = styled(Wrapper)`
   height: 100%;
@@ -21,9 +33,14 @@ const StyledWrapper = styled(Wrapper)`
   text-align: center;
 `;
 
-const StyledHeader = styled.div`
+const StyledHeaderWrapper = styled.div`
   width: 100%;
   margin: 30px 0 15px;
+  display: block;
+`;
+
+const StyledHeader = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +75,7 @@ const StyledRowWrapper = styled.div`
   padding: 0 15px;
 `;
 
-const StyledFlex = styled.div`
+const StyledRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -139,20 +156,22 @@ class Root extends Component {
   };
   render = () => (
     <StyledWrapper>
-      <Column>
-        <StyledHeader>
-          <StyledLogo>
-            <img src={logo} alt="Balance" />
-          </StyledLogo>
-          <StyledBranding>Balance</StyledBranding>
-        </StyledHeader>
+      <StyledColumn center={!this.state.input.length}>
+        <StyledHeaderWrapper>
+          <StyledHeader>
+            <StyledLogo>
+              <img src={logo} alt="Balance" />
+            </StyledLogo>
+            <StyledBranding>Balance</StyledBranding>
+          </StyledHeader>
+        </StyledHeaderWrapper>
         <Form onSubmit={this.updateList}>
           <Input placeholder="Search a token" onChange={this.onInputChange} />
         </Form>
         <StyledContainer>
           {this.state.list.map(crypto => (
             <StyledRowWrapper>
-              <StyledFlex key={crypto.id}>
+              <StyledRow key={crypto.id}>
                 <StyledIcon>
                   <img
                     src={
@@ -167,11 +186,11 @@ class Root extends Component {
                 <StyledResult type={crypto.type}>
                   {crypto.type === 'token' ? `${crypto.network} Token` : 'Coin'}
                 </StyledResult>
-              </StyledFlex>
+              </StyledRow>
             </StyledRowWrapper>
           ))}
         </StyledContainer>
-      </Column>
+      </StyledColumn>
     </StyledWrapper>
   );
 }
