@@ -81,7 +81,12 @@ const StyledRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+`;
+
+const StyledEmpty = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StyledIcon = styled.div`
@@ -122,16 +127,21 @@ class Root extends Component {
   state = {
     input: '',
     list: [],
-    delay: 300
+    delay: 150,
+    loading: false
   };
 
   clearList = () => {
     clearTimeout(timeout);
-    this.setState({ list: [] });
+    this.setState({ list: [], loading: false });
   };
   updateList = input => {
     const _input = typeof input === 'string' ? input : this.state.input;
-    if (timeout) clearTimeout(timeout);
+    if (timeout) {
+      this.setState({ loading: false });
+      clearTimeout(timeout);
+    }
+    this.setState({ loading: true });
     if (_input) {
       timeout = setTimeout(() => {
         const exactMatch = cryptoData.filter(
@@ -151,11 +161,12 @@ class Root extends Component {
             crypto.symbol.toLowerCase().match(_input.toLowerCase())
         );
         const list = _.unionBy(exactMatch, startsWithMatch, anyMatch, 'id');
-        this.setState({ list });
+        this.setState({ list, loading: false });
       }, this.state.delay);
     } else {
       this.setState({
-        list: []
+        list: [],
+        loading: false
       });
     }
   };
@@ -205,6 +216,13 @@ class Root extends Component {
               </StyledRow>
             </StyledRowWrapper>
           ))}
+          {!!this.state.input &&
+            !this.state.list.length &&
+            !this.state.loading && (
+              <StyledRowWrapper>
+                <StyledEmpty>{`Can't find that one`}</StyledEmpty>
+              </StyledRowWrapper>
+            )}
         </StyledContainer>
       </StyledColumn>
     </StyledWrapper>
