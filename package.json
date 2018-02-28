@@ -1,7 +1,8 @@
 {
-  "name": "bal-token-search",
-  "version": "0.1.0",
-  "private": true,
+  "name": "balance-search-token",
+  "description": "Balance - Search Token",
+  "version": "1.0.0",
+  "author": "Pedro Gomes <pedro@balance.io>",
   "dependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
