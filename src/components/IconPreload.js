@@ -13,7 +13,7 @@ const StyledPreload = styled.div`
 
 const IconPreload = () => (
   <StyledPreload>
-    {Object.keys(cryptoIcons).map(key => <img src={cryptoIcons[key]} alt={key} />)}
+    {Object.keys(cryptoIcons).map(key => <img key={key} src={cryptoIcons[key]} alt={key} />)}
   </StyledPreload>
 );
 
