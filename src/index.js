@@ -127,7 +127,7 @@ class Root extends Component {
   state = {
     input: '',
     list: [],
-    delay: 150,
+    delay: 300,
     loading: false
   };
 
