@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import styled, { injectGlobal } from 'styled-components';
 import registerServiceWorker from './registerServiceWorker';
 import logo from './logo.svg';
+import IconPreload from './components/IconPreload';
 import Form from './components/Form';
 import Wrapper from './components/Wrapper';
 import Input from './components/Input';
@@ -156,16 +157,17 @@ class Root extends Component {
   };
   render = () => (
     <StyledWrapper>
+      <IconPreload />
       <StyledColumn center={!this.state.input.length}>
         <StyledHeaderWrapper>
-          <StyledHeader>
-            <StyledLogo>
-              <a href="https://balance.io" target="_blank" rel="noopener noreferrer">
+          <a href="https://balance.io" target="_blank" rel="noopener noreferrer">
+            <StyledHeader>
+              <StyledLogo>
                 <img src={logo} alt="Balance" />
-              </a>
-            </StyledLogo>
-            <StyledBranding>Balance</StyledBranding>
-          </StyledHeader>
+              </StyledLogo>
+              <StyledBranding>Balance</StyledBranding>
+            </StyledHeader>
+          </a>
         </StyledHeaderWrapper>
         <Form onSubmit={this.updateList}>
           <Input placeholder="Search a token" onChange={this.onInputChange} />
