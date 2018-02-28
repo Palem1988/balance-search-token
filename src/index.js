@@ -116,7 +116,11 @@ class Root extends Component {
     if (_input) {
       timeout = setTimeout(() => {
         this.setState({
-          list: cryptoData.filter(crypto => !!crypto.name.toLowerCase().match(input.toLowerCase()))
+          list: cryptoData.filter(
+            crypto =>
+              crypto.name.toLowerCase().match(input.toLowerCase()) ||
+              crypto.symbol.toLowerCase().match(input.toLowerCase())
+          )
         });
       }, this.state.delay);
     } else {
