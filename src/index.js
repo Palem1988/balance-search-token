@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import _ from 'lodash';
 import styled, { injectGlobal } from 'styled-components';
 import registerServiceWorker from './registerServiceWorker';
 import logo from './logo.svg';
@@ -8,7 +7,7 @@ import IconPreload from './components/IconPreload';
 import Form from './components/Form';
 import Wrapper from './components/Wrapper';
 import Input from './components/Input';
-import cryptoData from './crypto.json';
+import search from './search';
 import cryptoIcons from './cryptocurrency-icons';
 import { colors, fonts, transitions, responsive, globalStyles } from './styles';
 
@@ -144,35 +143,7 @@ class Root extends Component {
     this.setState({ loading: true });
     if (_input) {
       timeout = setTimeout(() => {
-        const exactMatch = cryptoData.filter(
-          crypto =>
-            crypto.name.toLowerCase() === _input.toLowerCase() ||
-            crypto.symbol.toLowerCase() === _input.toLowerCase()
-        );
-        const sortedExactKeys = Object.keys(exactMatch).sort(
-          (a, b) => exactMatch[a].name.length - exactMatch[b].name.length
-        );
-        const sortedExactMatch = sortedExactKeys.map(key => exactMatch[key]);
-        const startsWithRegex = new RegExp(`^${_input}`, 'gi');
-        const startsWithMatch = cryptoData.filter(
-          crypto =>
-            crypto.name.toLowerCase().match(startsWithRegex) ||
-            crypto.symbol.toLowerCase().match(startsWithRegex)
-        );
-        const sortedStartsWithKeys = Object.keys(startsWithMatch).sort(
-          (a, b) => startsWithMatch[a].name.length - startsWithMatch[b].name.length
-        );
-        const sortedStartsWithMatch = sortedStartsWithKeys.map(key => startsWithMatch[key]);
-        const anyMatch = cryptoData.filter(
-          crypto =>
-            crypto.name.toLowerCase().match(_input.toLowerCase()) ||
-            crypto.symbol.toLowerCase().match(_input.toLowerCase())
-        );
-        const sortedAnyKeys = Object.keys(anyMatch).sort(
-          (a, b) => anyMatch[a].name.length - anyMatch[b].name.length
-        );
-        const sortedAnyMatch = sortedAnyKeys.map(key => anyMatch[key]);
-        const list = _.unionBy(sortedExactMatch, sortedStartsWithMatch, sortedAnyMatch, 'id');
+        const list = search(_input);
         this.setState({ list, loading: false });
       }, this.state.delay);
     } else {
